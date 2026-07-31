@@ -2,6 +2,16 @@
 
 Live endangered-species audio detection, stored on IPFS with a re-hashable local record for tamper-evident verification.
 
+## Screenshots
+
+**Watchlist match** — a Black Rail call gets classified, hashed, and pinned to IPFS:
+
+![Detection card showing a Black Rail match with confidence, audio hash, and IPFS link](docs/screenshots/detection-match.png)
+
+**No match** — nothing on the watchlist, so the UI shows BirdNET's closest real-bird guess instead of storing anything:
+
+![No watchlist match message with a closest-predicted-species guess](docs/screenshots/no-match.png)
+
 ## Architecture
 
 ```
