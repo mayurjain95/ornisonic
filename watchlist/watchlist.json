@@ -1,0 +1,1498 @@
+[
+  {
+    "scientific_name": "Aceros nipalensis",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Acridotheres javanicus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Acrocephalus griseldis",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Acrocephalus paludicola",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Acrocephalus tangorum",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Aegolius funereus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Aerodramus bartschi",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Agelaius tricolor",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Alophoixus tephrogenys",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Alouatta pigra",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Amazilia luciae",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Amazona agilis",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Amazona auropalliata",
+    "iucn_status": "CR"
+  },
+  {
+    "scientific_name": "Amazona finschi",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Amazona oratrix",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Amazona rhodocorytha",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Amazona tucumana",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Amazona ventralis",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Amazona vinacea",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Amazona viridigenalis",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Ammomanes deserti",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Ammospiza caudacuta",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Anairetes alpinus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Anas acuta",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Anas wyvilliana",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Anaxyrus canorus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Anaxyrus houstonensis",
+    "iucn_status": "CR"
+  },
+  {
+    "scientific_name": "Anodorhynchus hyacinthinus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Anodorhynchus leari",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Anser erythropus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Anthochaera phrygia",
+    "iucn_status": "CR"
+  },
+  {
+    "scientific_name": "Anthracoceros malayanus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Anthropoides paradiseus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Anthropoides virgo",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Anthus gustavi",
+    "iucn_status": "CR"
+  },
+  {
+    "scientific_name": "Anthus nattereri",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Anthus spragueii",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Antilophia bokermanni",
+    "iucn_status": "CR"
+  },
+  {
+    "scientific_name": "Antrostomus noctitherus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Aphanotriccus capitalis",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Aphelocephala leucopsis",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Aphelocoma coerulescens",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Apteryx mantelli",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Aquila adalberti",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Aquila heliaca",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Aquila nipalensis",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Ara ambiguus",
+    "iucn_status": "CR"
+  },
+  {
+    "scientific_name": "Ara glaucogularis",
+    "iucn_status": "CR"
+  },
+  {
+    "scientific_name": "Ara militaris",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Ardenna bulleri",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Ardenna creatopus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Argusianus argus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Artisornis moreaui",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Asthenes perijana",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Athene blewitti",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Atlapetes pallidiceps",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Atrichornis clamosus",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Atrichornis rufescens",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Aythya ferina",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Balearica regulorum",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Bangsia aureocincta",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Batrachostomus auritus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Berenicornis comatus",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Biatas nigropectus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Brachyramphus marmoratus",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Brotogeris pyrrhoptera",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Bubo scandiacus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Buceros bicornis",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Buceros hydrocorax",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Buceros rhinoceros",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Bucorvus leadbeateri",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Burhinus superciliaris",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Buteo ridgwayi",
+    "iucn_status": "CR"
+  },
+  {
+    "scientific_name": "Buteogallus coronatus",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Cacatua alba",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Calcarius ornatus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Calidris acuminata",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Calidris falcinellus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Calidris ferruginea",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Calidris fuscicollis",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Calidris pygmaea",
+    "iucn_status": "CR"
+  },
+  {
+    "scientific_name": "Calidris subruficollis",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Calidris tenuirostris",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Callocephalon fimbriatum",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Calyptophilus tertius",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Calyptorhynchus lathami",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Capito wallacei",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Carpococcyx radiceus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Carpococcyx renauldi",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Catharus bicknelli",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Catreus wallichii",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Celeus galeatus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Celeus obrieni",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Centrocercus urophasianus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Centropus chlororhynchos",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Centropus rectunguis",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Cephalopterus penduliger",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Cercomacra carbonaria",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Chaetura pelagica",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Charadrius mongolus",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Chasiempis ibidis",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Chersophilus duponti",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Chlidonias albostriatus",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Chlorodrepanis stejnegeri",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Chloropsis cochinchinensis",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Chloropsis sonnerati",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Chrysomma altirostre",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Cichlopsis leucogenys",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Circus cyaneus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Circus pygargus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Cistothorus apolinari",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Clamator glandarius",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Clanga clanga",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Clibanornis rufipectus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Clytoctantes alixii",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Colaptes fernandinae",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Colluricincla boweri",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Columbina cyanopis",
+    "iucn_status": "CR"
+  },
+  {
+    "scientific_name": "Conirostrum margaritae",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Coracopsis nigra",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Corvus leucognaphalus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Coryphaspiza melanotis",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Coua gigas",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Crax alberti",
+    "iucn_status": "CR"
+  },
+  {
+    "scientific_name": "Crax fasciolata",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Crax rubra",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Crypturellus boucardi",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Cyanolyca mirabilis",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Cyornis caerulatus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Cypseloides niger",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Cyrtonyx ocellatus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Dasyornis brachypterus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Dasyornis longirostris",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Dendrortyx barbatus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Diomedea exulans",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Drepanis coccinea",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Dysithamnus plumbeus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Egretta eulophotes",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Electron carinatum",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Eleothreptus anomalus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Emberiza aureola",
+    "iucn_status": "CR"
+  },
+  {
+    "scientific_name": "Eudyptes chrysocome",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Euphagus carolinus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Eupsittula canicularis",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Falco vespertinus",
+    "iucn_status": "CR"
+  },
+  {
+    "scientific_name": "Ferminia cerverai",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Ficedula basilanica",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Ficedula subrubra",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Formicivora erythronotos",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Formicivora grantsaui",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Foudia rubra",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Fratercula arctica",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Fregata andrewsi",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Fulmarus glacialis",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Gallirallus australis",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Gavia adamsii",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Geokichla guttata",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Geothlypis beldingi",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Geothlypis speciosa",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Glaucidium nubicola",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Glaucis dohrnii",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Grallaria alleni",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Grallaria bangsi",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Grallaria gigantea",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Grallaria kaestneri",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Grallaria milleri",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Grallaria ridgelyi",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Grallaricula ochraceifrons",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Grus americana",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Grus japonensis",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Grus monacha",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Guaruba guarouba",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Gubernatrix cristata",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Gymnomyza samoensis",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Gymnorhinus cyanocephalus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Haematopus ostralegus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Halcyon pileata",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Haliaeetus albicilla",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Haliaeetus pelagicus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Hapalopsittaca fuertesi",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Harpactes orrhophaeus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Harpia harpyja",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Harpyopsis novaeguineae",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Hemignathus wilsoni",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Henicorhina negreti",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Herpsilochmus parkeri",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Herpsilochmus pectoralis",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Hydrornis baudii",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Hylexetastes uniformis",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Hylorchilus navai",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Hypocnemis ochrogyna",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Hypopyrrhus pyrohypogaster",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Hypsipetes olivaceus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Iodopleura pipra",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Lanius meridionalis",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Laterallus jamaicensis",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Laterallus levraudi",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Laterallus xenopterus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Lathamus discolor",
+    "iucn_status": "CR"
+  },
+  {
+    "scientific_name": "Laticilla cinerascens",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Lepidothrix iris",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Leptotila ochraceiventris",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Leucogeranus leucogeranus",
+    "iucn_status": "CR"
+  },
+  {
+    "scientific_name": "Leucosticte atrata",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Leucosticte australis",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Limnodromus griseus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Limosa fedoa",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Limosa haemastica",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Lipaugus weberi",
+    "iucn_status": "CR"
+  },
+  {
+    "scientific_name": "Loxioides bailleui",
+    "iucn_status": "CR"
+  },
+  {
+    "scientific_name": "Loxops caeruleirostris",
+    "iucn_status": "CR"
+  },
+  {
+    "scientific_name": "Loxops coccineus",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Macroagelaius subalaris",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Magumma parva",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Megascops gilesi",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Meiglyptes tristis",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Melanitta fusca",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Melanodryas vittata",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Melithreptus validirostris",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Melopyrrha portoricensis",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Mesitornis unicolor",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Mesitornis variegatus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Mulleripicus pulverulentus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Myadestes palmeri",
+    "iucn_status": "CR"
+  },
+  {
+    "scientific_name": "Myiotheretes pernix",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Myrmoderus ruficauda",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Myrmotherula klagesi",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Myrmotherula urosticta",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Neomorphus geoffroyi",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Nesoenas mayeri",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Nesospingus speculiferus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Nestor meridionalis",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Nisaetus nanus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Notiomystis cincta",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Numenius madagascariensis",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Ocyceros griseus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Odontophorus strophium",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Ognorhynchus icterotis",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Onychoprion aleuticus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Onychoprion fuscatus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Oreomystis bairdi",
+    "iucn_status": "CR"
+  },
+  {
+    "scientific_name": "Oreophasis derbianus",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Oreoscopus gutturalis",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Ortalis erythroptera",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Otus sagittatus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Padda oryzivora",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Palmeria dolei",
+    "iucn_status": "CR"
+  },
+  {
+    "scientific_name": "Pandion haliaetus",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Paradoxornis flavirostris",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Paroreomyza montana",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Passer italiae",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Pauxi pauxi",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Pellorneum palustre",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Penelope albipennis",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Penelope perspicax",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Penelopina nigra",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Percnostola arenarum",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Philepitta schlegeli",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Phoenicoparrus andinus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Phylloscartes ceciliae",
+    "iucn_status": "CR"
+  },
+  {
+    "scientific_name": "Phylloscopus ijimae",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Phytotoma raimondii",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Pionites leucogaster",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Pipile cujubi",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Pithecophaga jefferyi",
+    "iucn_status": "CR"
+  },
+  {
+    "scientific_name": "Pitta nympha",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Pitta steerii",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Pityriasis gymnocephala",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Platyrinchus leucoryphus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Pluvialis squatarola",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Podiceps gallardoi",
+    "iucn_status": "CR"
+  },
+  {
+    "scientific_name": "Podiceps grisegena",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Podiceps nigricollis",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Poicephalus robustus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Polyplectron germaini",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Polyplectron malacense",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Pomatorhinus montanus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Primolius couloni",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Procnias tricarunculatus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Pseudastur occidentalis",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Pseudonestor xanthophrys",
+    "iucn_status": "CR"
+  },
+  {
+    "scientific_name": "Psittacus erithacus",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Psophia viridis",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Pterocles orientalis",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Pterodroma cervicalis",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Pterodroma cookii",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Pterodroma externa",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Pterodroma madeira",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Pterodroma phaeopygia",
+    "iucn_status": "CR"
+  },
+  {
+    "scientific_name": "Pterodroma sandwichensis",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Ptilocichla falcata",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Ptilocichla leucogrammica",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Puffinus newelli",
+    "iucn_status": "CR"
+  },
+  {
+    "scientific_name": "Pycnonotus taivanus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Pycnonotus zeylanicus",
+    "iucn_status": "CR"
+  },
+  {
+    "scientific_name": "Pycnoptilus floccosus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Pyrrhura albipectus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Pyrrhura calliptera",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Pyrrhura cruentata",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Pyrrhura leucotis",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Pyrrhura orcesi",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Pyrrhura viridicata",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Rallus antarcticus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Rallus semiplumbeus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Rhabdotorrhinus corrugatus",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Rhabdotorrhinus exarhatus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Rhegmatorhina gymnops",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Rhodostethia rosea",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Rhynchopsitta pachyrhyncha",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Rhynchopsitta terrisi",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Rhynochetos jubatus",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Rhyticeros cassidix",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Rhyticeros undulatus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Rissa tridactyla",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Rollulus rouloul",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Saundersilarus saundersi",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Schoenicola striatus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Scytalopus diamantinensis",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Scytalopus iraiensis",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Scytalopus novacapitalis",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Scytalopus robbinsi",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Scytalopus rodriguezi",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Sericossypha albocristata",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Setophaga chrysoparia",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Sitta magna",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Sitta whiteheadi",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Sittiparus owstoni",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Somateria mollissima",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Spheniscus demersus",
+    "iucn_status": "CR"
+  },
+  {
+    "scientific_name": "Spinus cucullatus",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Spizaetus isidori",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Spizella wortheni",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Sporophila cinnamomea",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Sporophila falcirostris",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Sporophila frontalis",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Sporophila palustris",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Stercorarius parasiticus",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Sterna aurantia",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Streptopelia turtur",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Strix uralensis",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Sylvia nigricapillus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Synallaxis infuscata",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Synallaxis kollari",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Synallaxis maranonica",
+    "iucn_status": "CR"
+  },
+  {
+    "scientific_name": "Synallaxis tithys",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Tachycineta euchrysea",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Telespiza ultima",
+    "iucn_status": "CR"
+  },
+  {
+    "scientific_name": "Terenura sicki",
+    "iucn_status": "CR"
+  },
+  {
+    "scientific_name": "Tetrax tetrax",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Thripophaga cherriei",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Thryophilus nicefori",
+    "iucn_status": "CR"
+  },
+  {
+    "scientific_name": "Thryophilus sernai",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Tinamus tao",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Todiramphus winchelli",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Touit surdus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Toxostoma bendirei",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Treron fulvicollis",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Tringa flavipes",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Tringa guttifer",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Turdus celaenops",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Turdus feae",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Turdus swalesi",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Tympanuchus pallidicinctus",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Urocissa ornata",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Vireo gracilirostris",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Wetmorethraupis sterrhopteron",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Xanthopsar flavus",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Xenoglaux loweryi",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Xenopirostris damii",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Xenopirostris polleni",
+    "iucn_status": "VU"
+  },
+  {
+    "scientific_name": "Xenospiza baileyi",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Zavattariornis stresemanni",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Zentrygon carrikeri",
+    "iucn_status": "EN"
+  },
+  {
+    "scientific_name": "Zosterops chloronothos",
+    "iucn_status": "CR"
+  }
+]
