@@ -5,6 +5,8 @@ Endpoints:
   POST /upload         upload an audio clip for classification + storage
   GET  /detections      list of stored detections (in-memory for MVP)
   POST /verify/{id}     re-verify a detection by id against re-uploaded audio
+                        (local sha256 hash, plus the on-chain keccak256 hash
+                        if the detection was anchored)
 """
 import hashlib
 import shutil
@@ -14,7 +16,7 @@ from pathlib import Path
 
 from fastapi import FastAPI, File, UploadFile, HTTPException
 
-from backend import classifier, ipfs_client
+from backend import blockchain, classifier, ipfs_client
 
 app = FastAPI(title="Ornisonic")
 
@@ -63,6 +65,17 @@ async def upload_audio(file: UploadFile = File(...)):
             }
             _next_id += 1
 
+            try:
+                anchor_result = blockchain.anchor_detection(
+                    file_path=tmp_path, ipfs_cid=cid,
+                    species_name=match["scientific_name"], confidence=match["confidence"],
+                )
+                record["onchain_tx_hash"] = anchor_result["tx_hash"]
+                record["onchain_detection_id"] = anchor_result["detection_id"]
+            except Exception as e:
+                record["onchain_tx_hash"] = None
+                record["onchain_error"] = str(e)
+
             _detections_log.append(record)
             results.append(record)
 
@@ -92,7 +105,17 @@ async def verify_detection(detection_id: int, file: UploadFile = File(...)):
         is_valid = hash_audio(tmp_path) == record["audio_hash"]
         if not is_valid:
             raise HTTPException(status_code=409, detail="Audio does not match stored record")
-        return {"verified": True, "detection_id": detection_id}
+
+        onchain = {"checked": False, "valid": None}
+        onchain_detection_id = record.get("onchain_detection_id")
+        if onchain_detection_id is not None:
+            try:
+                onchain["valid"] = blockchain.verify_detection(onchain_detection_id, tmp_path)
+                onchain["checked"] = True
+            except Exception as e:
+                onchain["error"] = str(e)
+
+        return {"verified": True, "detection_id": detection_id, "onchain": onchain}
     finally:
         Path(tmp_path).unlink(missing_ok=True)
 
