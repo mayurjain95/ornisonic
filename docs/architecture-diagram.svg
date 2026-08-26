@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 620" role="img" aria-label="Diagram of Ornisonic's two lanes: an ingest-and-anchor pipeline that turns a watchlist match into a sealed detection record on IPFS and Polygon Amoy, and a verify pipeline that checks a re-uploaded clip against that same record both locally and on-chain.">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap');
+      :root {
+        --surface-2: #eef4f0;
+        --ink: #1a231d;
+        --muted: #5e7266;
+        --line: #58695c;
+        --grid-dot: #d7e0da;
+        --teal: #0e9973;
+        --teal-dim: rgba(14, 153, 115, 0.10);
+      }
+      text { font-family: "Inter", -apple-system, sans-serif; fill: var(--ink); }
+      .mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
+      .title { font-size: 13.5px; font-weight: 600; }
+      .sub { font-size: 10.5px; fill: var(--muted); }
+      .lane-label { font-size: 11.5px; font-weight: 600; letter-spacing: 0.08em; }
+      .edge-label { font-size: 10.5px; fill: var(--muted); }
+      .legend-label { font-size: 10.5px; fill: var(--muted); }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="var(--ink)"></path>
+    </marker>
+    <marker id="arrowMuted" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)"></path>
+    </marker>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1" fill="var(--grid-dot)"></circle>
+    </pattern>
+  </defs>
+
+  <rect x="0" y="0" width="1000" height="620" fill="#ffffff"></rect>
+  <rect x="0" y="0" width="1000" height="620" fill="url(#grid)"></rect>
+
+  <!-- lane labels -->
+  <text x="30" y="108" class="lane-label" fill="var(--ink)">INGEST &amp; ANCHOR</text>
+  <text x="30" y="398" class="lane-label" fill="var(--ink)">VERIFY</text>
+
+  <!-- legend -->
+  <line x1="770" y1="26" x2="800" y2="26" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#arrow)"></line>
+  <text x="808" y="30" class="legend-label">flow</text>
+  <line x1="770" y1="46" x2="800" y2="46" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="3 3"></line>
+  <text x="808" y="50" class="legend-label">reads / calls</text>
+
+  <!-- ===== TOP LANE: INGEST & ANCHOR ===== -->
+
+  <!-- A: audio clip -->
+  <rect x="30" y="142" width="130" height="56" rx="3" fill="var(--surface-2)" stroke="var(--line)"></rect>
+  <text x="95" y="166" text-anchor="middle" class="title">Audio clip</text>
+  <text x="95" y="182" text-anchor="middle" class="sub mono">.wav / .mp3 upload</text>
+
+  <!-- arrow A -> classify -->
+  <line x1="160" y1="170" x2="204" y2="170" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#arrow)"></line>
+
+  <!-- Bx: BirdNET classify -->
+  <rect x="210" y="142" width="150" height="56" rx="3" fill="var(--surface-2)" stroke="var(--line)"></rect>
+  <text x="285" y="166" text-anchor="middle" class="title">BirdNET classify</text>
+  <text x="285" y="182" text-anchor="middle" class="sub mono">classifier.py · min_conf 0.5</text>
+
+  <!-- arrow classify -> fork -->
+  <line x1="360" y1="170" x2="464" y2="170" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#arrow)"></line>
+  <circle cx="470" cy="170" r="5" fill="var(--ink)"></circle>
+
+  <!-- fork -> terminal (no match) -->
+  <line x1="470" y1="176" x2="490" y2="264" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#arrow)"></line>
+  <text x="416" y="238" class="edge-label">no watchlist match</text>
+
+  <!-- terminal box -->
+  <rect x="380" y="268" width="220" height="56" rx="3" fill="none" stroke="var(--muted)" stroke-dasharray="4 4"></rect>
+  <text x="490" y="292" text-anchor="middle" class="title" fill="var(--muted)">best_guess only</text>
+  <text x="490" y="308" text-anchor="middle" class="sub mono">nothing stored</text>
+
+  <!-- fork -> B1 (ipfs) -->
+  <line x1="476" y1="164" x2="556" y2="94" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#arrow)"></line>
+  <!-- fork -> B2 (anchor) -->
+  <line x1="476" y1="178" x2="556" y2="210" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#arrow)"></line>
+  <text x="486" y="128" class="edge-label">watchlist match (≥ 0.5)</text>
+
+  <!-- B1: upload to IPFS -->
+  <rect x="560" y="64" width="190" height="56" rx="3" fill="var(--surface-2)" stroke="var(--line)"></rect>
+  <text x="655" y="88" text-anchor="middle" class="title">Upload to IPFS</text>
+  <text x="655" y="104" text-anchor="middle" class="sub mono">ipfs_client.py · Pinata</text>
+
+  <!-- B2: anchor on-chain -->
+  <rect x="560" y="184" width="190" height="56" rx="3" fill="var(--surface-2)" stroke="var(--teal)" stroke-width="1.5"></rect>
+  <text x="655" y="208" text-anchor="middle" class="title">Anchor on-chain</text>
+  <text x="655" y="224" text-anchor="middle" class="sub mono">blockchain.py → DetectionRegistry.sol</text>
+
+  <!-- B1, B2 -> C -->
+  <line x1="750" y1="94" x2="796" y2="146" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#arrow)"></line>
+  <line x1="750" y1="210" x2="796" y2="178" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#arrow)"></line>
+
+  <!-- C: detection record -->
+  <rect x="800" y="124" width="170" height="76" rx="3" fill="var(--teal-dim)" stroke="var(--teal)" stroke-width="2"></rect>
+  <text x="885" y="152" text-anchor="middle" class="title">Detection record</text>
+  <text x="885" y="169" text-anchor="middle" class="sub mono">audio_hash · ipfs_cid</text>
+  <text x="885" y="183" text-anchor="middle" class="sub mono">onchain_tx_hash</text>
+
+  <!-- ===== BOTTOM LANE: VERIFY ===== -->
+
+  <!-- D: re-uploaded clip -->
+  <rect x="30" y="432" width="130" height="56" rx="3" fill="var(--surface-2)" stroke="var(--line)"></rect>
+  <text x="95" y="456" text-anchor="middle" class="title">Re-uploaded clip</text>
+  <text x="95" y="472" text-anchor="middle" class="sub mono">POST /verify/{id}</text>
+
+  <!-- arrow D -> fork2 -->
+  <line x1="160" y1="460" x2="464" y2="460" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#arrow)"></line>
+  <circle cx="470" cy="460" r="5" fill="var(--ink)"></circle>
+
+  <!-- fork2 -> E1 (local) -->
+  <line x1="476" y1="452" x2="796" y2="412" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#arrow)"></line>
+  <!-- fork2 -> E2 (on-chain) -->
+  <line x1="476" y1="468" x2="556" y2="532" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#arrow)"></line>
+
+  <!-- E1: local check -->
+  <rect x="800" y="384" width="170" height="56" rx="3" fill="var(--surface-2)" stroke="var(--line)"></rect>
+  <text x="885" y="408" text-anchor="middle" class="title">Local check</text>
+  <text x="885" y="424" text-anchor="middle" class="sub mono">sha256(file) == audio_hash</text>
+
+  <!-- E2: on-chain check -->
+  <rect x="560" y="504" width="190" height="56" rx="3" fill="var(--surface-2)" stroke="var(--teal)" stroke-width="1.5"></rect>
+  <text x="655" y="528" text-anchor="middle" class="title">On-chain check</text>
+  <text x="655" y="544" text-anchor="middle" class="sub mono">contract.verify(id, keccak256)</text>
+
+  <!-- E1 -> F (straight down) -->
+  <line x1="885" y1="440" x2="885" y2="520" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#arrow)"></line>
+  <!-- E2 -> F -->
+  <line x1="750" y1="524" x2="796" y2="552" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#arrow)"></line>
+
+  <!-- F: verify response -->
+  <rect x="800" y="524" width="170" height="76" rx="3" fill="var(--teal-dim)" stroke="var(--teal)" stroke-width="2"></rect>
+  <text x="885" y="552" text-anchor="middle" class="title">Verify response</text>
+  <text x="885" y="569" text-anchor="middle" class="sub mono">verified: bool</text>
+  <text x="885" y="583" text-anchor="middle" class="sub mono">onchain: { checked, valid }</text>
+
+  <!-- dashed reference connectors between lanes -->
+  <line x1="885" y1="200" x2="885" y2="384" stroke="var(--muted)" stroke-width="1.3" stroke-dasharray="4 4" marker-end="url(#arrowMuted)"></line>
+  <text x="895" y="296" class="edge-label">reads</text>
+
+  <line x1="655" y1="240" x2="655" y2="504" stroke="var(--muted)" stroke-width="1.3" stroke-dasharray="4 4" marker-end="url(#arrowMuted)"></line>
+  <text x="665" y="376" class="edge-label">same contract</text>
+</svg>

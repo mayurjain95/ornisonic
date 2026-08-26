@@ -1,0 +1,324 @@
+<title>Anchor & Verify</title>
+<meta name="description" content="How Ornisonic turns a bird call into a tamper-proof, independently verifiable record.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,440;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #fbfcfa;
+    --surface-2: #eef4f0;
+    --ink: #1a231d;
+    --muted: #5e7266;
+    --line: #58695c;
+    --line-soft: #dbe3dd;
+    --grid-dot: #d7e0da;
+    --teal: #0e9973;
+    --teal-dim: rgba(14, 153, 115, 0.10);
+    --amber: #a8650f;
+    --font-display: "Fraunces", Georgia, serif;
+    --font-body: "Inter", -apple-system, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    margin: 0;
+    padding: 64px 24px 80px;
+    display: flex;
+    justify-content: center;
+  }
+
+  main {
+    width: 100%;
+    max-width: 980px;
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin: 0 0 14px;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin: 0 0 20px;
+    text-wrap: balance;
+    color: var(--ink);
+  }
+
+  .lede {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: color-mix(in srgb, var(--ink) 85%, var(--muted));
+    max-width: 62ch;
+    margin: 0 0 48px;
+  }
+
+  .lede strong { color: var(--ink); font-weight: 600; }
+
+  figure {
+    margin: 0 0 12px;
+    padding: 28px 20px 20px;
+    background: var(--surface);
+    border: 1px solid var(--line-soft);
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(26, 35, 29, 0.04);
+  }
+
+  svg { width: 100%; height: auto; display: block; overflow: visible; }
+
+  svg text { font-family: var(--font-body); fill: currentColor; }
+  svg .mono { font-family: var(--font-mono); }
+  svg .title { font-size: 13.5px; font-weight: 600; }
+  svg .sub { font-size: 10.5px; fill: var(--muted); }
+  svg .lane-label { font-size: 11.5px; font-weight: 600; letter-spacing: 0.08em; }
+  svg .edge-label { font-size: 10.5px; fill: var(--muted); }
+  svg .legend-label { font-size: 10.5px; fill: var(--muted); }
+
+  figcaption {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--muted);
+    padding: 16px 4px 4px;
+    max-width: 70ch;
+  }
+
+  .measured {
+    margin-top: 40px;
+    padding: 22px 24px;
+    background: var(--surface);
+    border: 1px solid var(--line-soft);
+    border-radius: 8px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 20px 28px;
+  }
+
+  .measured h2 {
+    grid-column: 1 / -1;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 4px;
+  }
+
+  .stat dd {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 1.3rem;
+    color: var(--teal);
+    margin: 0 0 4px;
+  }
+
+  .stat dt {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  footer {
+    margin-top: 28px;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  footer a { color: var(--muted); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    figure { animation: rise 0.5s ease-out; }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  }
+</style>
+
+<main>
+  <p class="eyebrow">Ornisonic — system diagram</p>
+  <h1>Anchor &amp; verify</h1>
+  <p class="lede">
+    A watchlist match doesn't just get logged — it gets <strong>sealed</strong>:
+    hashed, pinned to IPFS, and written to a Polygon smart contract. Anyone can
+    later re-upload the same clip and the app checks it two ways —
+    against the local record <em>and</em> against the on-chain one — so
+    verification never has to take the repo's word for it.
+  </p>
+
+  <figure>
+    <svg viewBox="0 0 1000 620" role="img" aria-label="Diagram of Ornisonic's two lanes: an ingest-and-anchor pipeline that turns a watchlist match into a sealed detection record on IPFS and Polygon Amoy, and a verify pipeline that checks a re-uploaded clip against that same record both locally and on-chain.">
+      <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="var(--ink)"></path>
+        </marker>
+        <marker id="arrowMuted" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="var(--muted)"></path>
+        </marker>
+        <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+          <circle cx="1" cy="1" r="1" fill="var(--grid-dot)"></circle>
+        </pattern>
+      </defs>
+
+      <rect x="0" y="0" width="1000" height="620" fill="url(#grid)"></rect>
+
+      <!-- lane labels -->
+      <text x="30" y="108" class="lane-label" fill="var(--ink)">INGEST &amp; ANCHOR</text>
+      <text x="30" y="398" class="lane-label" fill="var(--ink)">VERIFY</text>
+
+      <!-- legend -->
+      <line x1="770" y1="26" x2="800" y2="26" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow)"></line>
+      <text x="808" y="30" class="legend-label">flow</text>
+      <line x1="770" y1="46" x2="800" y2="46" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="3 3"></line>
+      <text x="808" y="50" class="legend-label">reads / calls</text>
+
+      <!-- ===== TOP LANE: INGEST & ANCHOR ===== -->
+
+      <!-- A: audio clip -->
+      <rect x="30" y="142" width="130" height="56" rx="3" fill="var(--surface-2)" stroke="var(--line)"></rect>
+      <text x="95" y="166" text-anchor="middle" class="title">Audio clip</text>
+      <text x="95" y="182" text-anchor="middle" class="sub mono">.wav / .mp3 upload</text>
+
+      <!-- arrow A -> classify -->
+      <line x1="160" y1="170" x2="204" y2="170" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow)"></line>
+
+      <!-- Bx: BirdNET classify -->
+      <rect x="210" y="142" width="150" height="56" rx="3" fill="var(--surface-2)" stroke="var(--line)"></rect>
+      <text x="285" y="166" text-anchor="middle" class="title">BirdNET classify</text>
+      <text x="285" y="182" text-anchor="middle" class="sub mono">classifier.py · min_conf 0.5</text>
+
+      <!-- arrow classify -> fork -->
+      <line x1="360" y1="170" x2="464" y2="170" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow)"></line>
+      <circle cx="470" cy="170" r="5" fill="currentColor"></circle>
+
+      <!-- fork -> terminal (no match) -->
+      <line x1="470" y1="176" x2="490" y2="264" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow)"></line>
+      <text x="416" y="238" class="edge-label">no watchlist match</text>
+
+      <!-- terminal box -->
+      <rect x="380" y="268" width="220" height="56" rx="3" fill="none" stroke="var(--muted)" stroke-dasharray="4 4"></rect>
+      <text x="490" y="292" text-anchor="middle" class="title" fill="var(--muted)">best_guess only</text>
+      <text x="490" y="308" text-anchor="middle" class="sub mono">nothing stored</text>
+
+      <!-- fork -> B1 (ipfs) -->
+      <line x1="476" y1="164" x2="556" y2="94" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow)"></line>
+      <!-- fork -> B2 (anchor) -->
+      <line x1="476" y1="178" x2="556" y2="210" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow)"></line>
+      <text x="486" y="128" class="edge-label">watchlist match (≥ 0.5)</text>
+
+      <!-- B1: upload to IPFS -->
+      <rect x="560" y="64" width="190" height="56" rx="3" fill="var(--surface-2)" stroke="var(--line)"></rect>
+      <text x="655" y="88" text-anchor="middle" class="title">Upload to IPFS</text>
+      <text x="655" y="104" text-anchor="middle" class="sub mono">ipfs_client.py · Pinata</text>
+
+      <!-- B2: anchor on-chain -->
+      <rect x="560" y="184" width="190" height="56" rx="3" fill="var(--surface-2)" stroke="var(--teal)" stroke-width="1.5"></rect>
+      <text x="655" y="208" text-anchor="middle" class="title">Anchor on-chain</text>
+      <text x="655" y="224" text-anchor="middle" class="sub mono">blockchain.py → DetectionRegistry.sol</text>
+
+      <!-- B1, B2 -> C -->
+      <line x1="750" y1="94" x2="796" y2="146" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow)"></line>
+      <line x1="750" y1="210" x2="796" y2="178" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow)"></line>
+
+      <!-- C: detection record -->
+      <rect x="800" y="124" width="170" height="76" rx="3" fill="var(--teal-dim)" stroke="var(--teal)" stroke-width="2"></rect>
+      <text x="885" y="152" text-anchor="middle" class="title">Detection record</text>
+      <text x="885" y="169" text-anchor="middle" class="sub mono">audio_hash · ipfs_cid</text>
+      <text x="885" y="183" text-anchor="middle" class="sub mono">onchain_tx_hash</text>
+
+      <!-- ===== BOTTOM LANE: VERIFY ===== -->
+
+      <!-- D: re-uploaded clip -->
+      <rect x="30" y="432" width="130" height="56" rx="3" fill="var(--surface-2)" stroke="var(--line)"></rect>
+      <text x="95" y="456" text-anchor="middle" class="title">Re-uploaded clip</text>
+      <text x="95" y="472" text-anchor="middle" class="sub mono">POST /verify/{id}</text>
+
+      <!-- arrow D -> fork2 -->
+      <line x1="160" y1="460" x2="464" y2="460" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow)"></line>
+      <circle cx="470" cy="460" r="5" fill="currentColor"></circle>
+
+      <!-- fork2 -> E1 (local) -->
+      <line x1="476" y1="452" x2="796" y2="412" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow)"></line>
+      <!-- fork2 -> E2 (on-chain) -->
+      <line x1="476" y1="468" x2="556" y2="532" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow)"></line>
+
+      <!-- E1: local check -->
+      <rect x="800" y="384" width="170" height="56" rx="3" fill="var(--surface-2)" stroke="var(--line)"></rect>
+      <text x="885" y="408" text-anchor="middle" class="title">Local check</text>
+      <text x="885" y="424" text-anchor="middle" class="sub mono">sha256(file) == audio_hash</text>
+
+      <!-- E2: on-chain check -->
+      <rect x="560" y="504" width="190" height="56" rx="3" fill="var(--surface-2)" stroke="var(--teal)" stroke-width="1.5"></rect>
+      <text x="655" y="528" text-anchor="middle" class="title">On-chain check</text>
+      <text x="655" y="544" text-anchor="middle" class="sub mono">contract.verify(id, keccak256)</text>
+
+      <!-- E1 -> F (straight down) -->
+      <line x1="885" y1="440" x2="885" y2="520" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow)"></line>
+      <!-- E2 -> F -->
+      <line x1="750" y1="524" x2="796" y2="552" stroke="currentColor" stroke-width="1.5" marker-end="url(#arrow)"></line>
+
+      <!-- F: verify response -->
+      <rect x="800" y="524" width="170" height="76" rx="3" fill="var(--teal-dim)" stroke="var(--teal)" stroke-width="2"></rect>
+      <text x="885" y="552" text-anchor="middle" class="title">Verify response</text>
+      <text x="885" y="569" text-anchor="middle" class="sub mono">verified: bool</text>
+      <text x="885" y="583" text-anchor="middle" class="sub mono">onchain: { checked, valid }</text>
+
+      <!-- dashed reference connectors between lanes -->
+      <line x1="885" y1="200" x2="885" y2="384" stroke="var(--muted)" stroke-width="1.3" stroke-dasharray="4 4" marker-end="url(#arrowMuted)"></line>
+      <text x="895" y="296" class="edge-label">reads</text>
+
+      <line x1="655" y1="240" x2="655" y2="504" stroke="var(--muted)" stroke-width="1.3" stroke-dasharray="4 4" marker-end="url(#arrowMuted)"></line>
+      <text x="665" y="376" class="edge-label">same contract</text>
+    </svg>
+
+    <figcaption>
+      Two lanes sharing one set of artifacts. A watchlist match forks into an IPFS
+      upload and an on-chain anchor (<code>DetectionRegistry.sol</code>), which
+      converge into the stored <strong>detection record</strong>. Verifying later
+      forks the same way — a local sha256 compare against that record, and a
+      keccak256 call into the same deployed contract — so a mismatch on either
+      side surfaces independently rather than trusting one source.
+    </figcaption>
+  </figure>
+
+  <div class="measured">
+    <h2>Measured on Polygon Amoy — this repo's live contract</h2>
+    <dl class="stat">
+      <dd>5</dd>
+      <dt>detections anchored on-chain</dt>
+    </dl>
+    <dl class="stat">
+      <dd>~235,500</dd>
+      <dt>avg. gas per anchor tx</dt>
+    </dl>
+    <dl class="stat">
+      <dd>0.0118 POL</dd>
+      <dt>avg. cost per anchor (testnet)</dt>
+    </dl>
+    <dl class="stat">
+      <dd>5</dd>
+      <dt>test clips processed this session</dt>
+    </dl>
+  </div>
+
+  <footer>
+    contract: 0x52278aAc6BfE5fb72e8b526d3a75d9a75Fc6F463 · verified source at
+    amoy.polygonscan.com
+  </footer>
+</main>

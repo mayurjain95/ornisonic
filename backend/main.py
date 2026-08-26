@@ -7,8 +7,11 @@ Endpoints:
   POST /verify/{id}     re-verify a detection by id against re-uploaded audio
                         (local sha256 hash, plus the on-chain keccak256 hash
                         if the detection was anchored)
+  GET  /stats           total clips processed / watchlist matches, durable
+                        across restarts (backend/upload_log.jsonl)
 """
 import hashlib
+import json
 import shutil
 import tempfile
 import time
@@ -24,11 +27,25 @@ app = FastAPI(title="Ornisonic")
 _detections_log: list[dict] = []
 _next_id = 0
 
+# Append-only log of every /upload call (matched or not) so the total count
+# of clips processed survives server restarts, unlike _detections_log above.
+UPLOAD_LOG_PATH = Path(__file__).parent / "upload_log.jsonl"
+
 
 def hash_audio(file_path: str) -> str:
     """Returns the sha256 hash of the raw audio file bytes, hex-encoded."""
     with open(file_path, "rb") as f:
         return hashlib.sha256(f.read()).hexdigest()
+
+
+def log_upload(filename: str, matched: bool, species: list[str]) -> None:
+    with open(UPLOAD_LOG_PATH, "a") as f:
+        f.write(json.dumps({
+            "timestamp": int(time.time()),
+            "filename": filename,
+            "matched": matched,
+            "species": species,
+        }) + "\n")
 
 
 @app.post("/upload")
@@ -45,11 +62,14 @@ async def upload_audio(file: UploadFile = File(...)):
         matches = result["matches"]
 
         if not matches:
+            log_upload(file.filename, matched=False, species=[])
             return {
                 "status": "no_endangered_species_detected",
                 "matches": [],
                 "best_guess": result["best_guess"],
             }
+
+        log_upload(file.filename, matched=True, species=[m["scientific_name"] for m in matches])
 
         results = []
         for match in matches:
@@ -88,6 +108,19 @@ async def upload_audio(file: UploadFile = File(...)):
 @app.get("/detections")
 async def list_detections():
     return {"count": len(_detections_log), "detections": _detections_log}
+
+
+@app.get("/stats")
+async def stats():
+    total = 0
+    matched = 0
+    if UPLOAD_LOG_PATH.exists():
+        with open(UPLOAD_LOG_PATH) as f:
+            for line in f:
+                total += 1
+                if json.loads(line)["matched"]:
+                    matched += 1
+    return {"total_clips_processed": total, "watchlist_matches": matched}
 
 
 @app.post("/verify/{detection_id}")
