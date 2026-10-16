@@ -11,6 +11,7 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [verifyingId, setVerifyingId] = useState(null);
+  const [slowStart, setSlowStart] = useState(false);
 
   const load = useCallback(async () => {
     try {
@@ -18,7 +19,11 @@ export default function App() {
       setDetections(data.detections || []);
       setError(null);
     } catch (err) {
-      setError("Could not reach the backend. Is it running on port 8000?");
+      setError(
+        import.meta.env.DEV
+          ? "Could not reach the backend. Is it running on port 8000?"
+          : "Could not reach the server. Please try again in a minute."
+      );
     } finally {
       setLoading(false);
     }
@@ -27,6 +32,14 @@ export default function App() {
   useEffect(() => {
     load();
   }, [load]);
+
+  // The backend scales to zero when idle, so the first request can take a
+  // while; say so instead of leaving a bare "Loading…".
+  useEffect(() => {
+    if (!loading) return;
+    const timer = setTimeout(() => setSlowStart(true), 3000);
+    return () => clearTimeout(timer);
+  }, [loading]);
 
   function handleNewMatches(matches) {
     setDetections((prev) => [...matches, ...prev]);
@@ -52,7 +65,13 @@ export default function App() {
       <UploadPanel onResult={handleNewMatches} />
 
       <main className="feed">
-        {loading && <p className="feed-status">Loading detections…</p>}
+        {loading && (
+          <p className="feed-status">
+            {slowStart
+              ? "Waking up the server — the first visit after a quiet spell can take up to a minute…"
+              : "Loading detections…"}
+          </p>
+        )}
         {error && <p className="feed-status error">{error}</p>}
         {!loading && !error && detections.length === 0 && (
           <p className="feed-status">No detections stored yet. Upload a clip to get started.</p>

@@ -1,4 +1,6 @@
-const BASE = "/api";
+// Dev: "/api", proxied to the local backend by vite.config.js.
+// Production builds: the Cloud Run URL from frontend/.env.production.
+const BASE = import.meta.env.VITE_API_BASE ?? "/api";
 
 export async function uploadAudio(file) {
   const form = new FormData();

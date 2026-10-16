@@ -8,3 +8,5 @@ node_modules/
 .claude/
 backend/upload_log.jsonl
 eval_data/negatives/
+.firebase/
+frontend/dist/

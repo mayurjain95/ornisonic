@@ -11,12 +11,14 @@ Endpoints:
   GET  /stats           total clips processed / watchlist matches
 """
 import hashlib
+import os
 import shutil
 import tempfile
 from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import FastAPI, File, UploadFile, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from backend import blockchain, classifier, db, ipfs_client
@@ -33,6 +35,18 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(title="Ornisonic", lifespan=lifespan)
+
+# The deployed frontend (Firebase Hosting) calls the API cross-origin. Local
+# dev doesn't need this: the Vite dev server proxies /api to the backend.
+CORS_ORIGINS = os.getenv(
+    "CORS_ORIGINS", "https://ornisonic.web.app,https://ornisonic.firebaseapp.com"
+).split(",")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[o.strip() for o in CORS_ORIGINS if o.strip()],
+    allow_methods=["GET", "POST"],
+    allow_headers=["*"],
+)
 
 
 def hash_audio(file_path: str) -> str:

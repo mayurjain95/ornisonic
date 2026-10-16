@@ -130,6 +130,23 @@ npm run dev
 ```
 Open http://localhost:5173 — the dev server proxies `/api/*` requests to the FastAPI backend, so no CORS setup is needed. Uploading a clip stores any endangered-species match and shows it as a card with its confidence, IPFS link, hash, and a verify button. If nothing on the watchlist matches, the UI instead shows BirdNET's closest real-bird prediction (with a thumbnail and a link to check its IUCN status) — nothing is stored in that case, since only watchlist matches get hashed and pinned to IPFS.
 
+## Deployment
+
+- **Backend:** Google Cloud Run (`us-east4`), built from `Dockerfile` by Cloud
+  Build on every push to `main`. Secrets (`DATABASE_URL`, Pinata keys, wallet
+  key) come from Secret Manager; `CONTRACT_ADDRESS` and `POLYGON_RPC_URL` are
+  plain env vars. Scales to zero when idle, so the first request after a quiet
+  spell is slow.
+- **Database:** Neon Postgres 17. Fill a fresh one with
+  `python -m scripts.backfill_from_chain`, with `DATABASE_URL` pointed at it.
+- **Frontend:** Firebase Hosting. `frontend/.env.production` sets the backend
+  URL for production builds; the backend allows the Firebase origins via
+  `CORS_ORIGINS` (defaults to `ornisonic.web.app` / `ornisonic.firebaseapp.com`).
+  Deploy with:
+  ```bash
+  npx firebase-tools deploy --only hosting   # builds frontend/ first
+  ```
+
 ## Measured results
 
 Real numbers pulled from this repo's actual runs, not estimates.
