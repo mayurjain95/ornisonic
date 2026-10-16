@@ -8,6 +8,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 from web3 import Web3
+from web3.exceptions import ContractLogicError
 
 load_dotenv()
 
@@ -77,9 +78,13 @@ def verify_detection(detection_id: int, file_path: str) -> bool:
     return contract.functions.verify(detection_id, audio_hash).call()
 
 
-def get_detection(detection_id: int) -> dict:
+def get_detection(detection_id: int) -> dict | None:
+    """Returns the on-chain record, or None if the contract has no such id."""
     _, contract, _ = get_web3()
-    d = contract.functions.getDetection(detection_id).call()
+    try:
+        d = contract.functions.getDetection(detection_id).call()
+    except ContractLogicError:
+        return None
     return {
         "audio_hash": "0x" + d[0].hex(),
         "ipfs_cid": d[1],

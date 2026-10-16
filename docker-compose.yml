@@ -1,0 +1,37 @@
+# Local Postgres matching production (Neon, Postgres 17).
+# Start: docker compose up -d    Stop: docker compose down    Wipe data: docker compose down -v
+services:
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: ornisonic
+      POSTGRES_PASSWORD: ornisonic
+      POSTGRES_DB: ornisonic
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ornisonic"]
+      interval: 2s
+      timeout: 3s
+      retries: 15
+
+  # The production backend image, run locally against the db above.
+  # Opt-in so `docker compose up -d` still starts only the database:
+  #   docker compose --profile backend up --build
+  backend:
+    profiles: [backend]
+    build: .
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql://ornisonic:ornisonic@db:5432/ornisonic
+      PORT: 8080
+    ports:
+      - "8000:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  pgdata:

@@ -3,33 +3,36 @@ FastAPI app: upload audio -> classify -> if endangered match, store on IPFS.
 
 Endpoints:
   POST /upload         upload an audio clip for classification + storage
-  GET  /detections      list of stored detections (in-memory for MVP)
+  GET  /detections      list of stored detections (Postgres, see backend/db.py)
   POST /verify/{id}     re-verify a detection by id against re-uploaded audio
-                        (local sha256 hash, plus the on-chain keccak256 hash
-                        if the detection was anchored)
-  GET  /stats           total clips processed / watchlist matches, durable
-                        across restarts (backend/upload_log.jsonl)
+                        (local sha256 hash, plus, if the detection was
+                        anchored, the on-chain keccak256 hash and a
+                        cross-check of the DB record against the chain)
+  GET  /stats           total clips processed / watchlist matches
 """
 import hashlib
-import json
 import shutil
 import tempfile
-import time
+from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import FastAPI, File, UploadFile, HTTPException
+from fastapi.responses import JSONResponse
 
-from backend import blockchain, classifier, ipfs_client
+from backend import blockchain, classifier, db, ipfs_client
 
-app = FastAPI(title="Ornisonic")
 
-# In-memory store for the MVP; swap for a real DB (Postgres/SQLite) once this works.
-_detections_log: list[dict] = []
-_next_id = 0
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    db.init_db()
+    # Load BirdNET before the server accepts traffic, so the first upload
+    # after a cold start doesn't also pay for model loading.
+    classifier.get_analyzer()
+    yield
+    db.close_db()
 
-# Append-only log of every /upload call (matched or not) so the total count
-# of clips processed survives server restarts, unlike _detections_log above.
-UPLOAD_LOG_PATH = Path(__file__).parent / "upload_log.jsonl"
+
+app = FastAPI(title="Ornisonic", lifespan=lifespan)
 
 
 def hash_audio(file_path: str) -> str:
@@ -38,20 +41,47 @@ def hash_audio(file_path: str) -> str:
         return hashlib.sha256(f.read()).hexdigest()
 
 
-def log_upload(filename: str, matched: bool, species: list[str]) -> None:
-    with open(UPLOAD_LOG_PATH, "a") as f:
-        f.write(json.dumps({
-            "timestamp": int(time.time()),
-            "filename": filename,
-            "matched": matched,
-            "species": species,
-        }) + "\n")
+def check_onchain(record: dict, file_path: str) -> dict:
+    """
+    Compares the re-uploaded audio and the DB record against the anchored
+    on-chain record, so a tampered DB row can't pass verification.
+    """
+    result = {
+        "checked": False,
+        "valid": None,               # audio keccak256 == on-chain hash
+        "record_matches_db": None,   # DB fields == on-chain fields
+        "mismatched_fields": [],
+    }
+    try:
+        onchain_record = blockchain.get_detection(record["onchain_detection_id"])
+        audio_hash = "0x" + blockchain.hash_audio(file_path).hex()
+    except Exception as e:
+        # RPC/config failure: the chain couldn't be asked, not a mismatch.
+        result["error"] = str(e)
+        return result
+
+    result["checked"] = True
+    if onchain_record is None:
+        result["valid"] = False
+        result["record_matches_db"] = False
+        result["error"] = "No such detection on-chain"
+        return result
+
+    result["valid"] = onchain_record["audio_hash"] == audio_hash
+    expected = {
+        "ipfs_cid": record["ipfs_cid"],
+        "species_name": record["scientific_name"],
+        "confidence_bps": int(record["confidence"] * 10000),  # as sent in anchor_detection
+    }
+    result["mismatched_fields"] = [
+        field for field, value in expected.items() if onchain_record[field] != value
+    ]
+    result["record_matches_db"] = not result["mismatched_fields"]
+    return result
 
 
 @app.post("/upload")
 async def upload_audio(file: UploadFile = File(...)):
-    global _next_id
-
     suffix = Path(file.filename).suffix or ".wav"
     with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as tmp:
         shutil.copyfileobj(file.file, tmp)
@@ -62,14 +92,14 @@ async def upload_audio(file: UploadFile = File(...)):
         matches = result["matches"]
 
         if not matches:
-            log_upload(file.filename, matched=False, species=[])
+            db.log_upload(file.filename, matched=False, species=[])
             return {
                 "status": "no_endangered_species_detected",
                 "matches": [],
                 "best_guess": result["best_guess"],
             }
 
-        log_upload(file.filename, matched=True, species=[m["scientific_name"] for m in matches])
+        db.log_upload(file.filename, matched=True, species=[m["scientific_name"] for m in matches])
 
         results = []
         for match in matches:
@@ -78,12 +108,9 @@ async def upload_audio(file: UploadFile = File(...)):
 
             record = {
                 **match,
-                "detection_id": _next_id,
                 "ipfs_cid": cid,
                 "audio_hash": audio_hash,
-                "timestamp": int(time.time()),
             }
-            _next_id += 1
 
             try:
                 anchor_result = blockchain.anchor_detection(
@@ -96,8 +123,7 @@ async def upload_audio(file: UploadFile = File(...)):
                 record["onchain_tx_hash"] = None
                 record["onchain_error"] = str(e)
 
-            _detections_log.append(record)
-            results.append(record)
+            results.append(db.insert_detection(record))
 
         return {"status": "stored", "matches": results}
 
@@ -107,25 +133,18 @@ async def upload_audio(file: UploadFile = File(...)):
 
 @app.get("/detections")
 async def list_detections():
-    return {"count": len(_detections_log), "detections": _detections_log}
+    detections = db.list_detections()
+    return {"count": len(detections), "detections": detections}
 
 
 @app.get("/stats")
 async def stats():
-    total = 0
-    matched = 0
-    if UPLOAD_LOG_PATH.exists():
-        with open(UPLOAD_LOG_PATH) as f:
-            for line in f:
-                total += 1
-                if json.loads(line)["matched"]:
-                    matched += 1
-    return {"total_clips_processed": total, "watchlist_matches": matched}
+    return db.upload_stats()
 
 
 @app.post("/verify/{detection_id}")
 async def verify_detection(detection_id: int, file: UploadFile = File(...)):
-    record = next((d for d in _detections_log if d["detection_id"] == detection_id), None)
+    record = db.get_detection(detection_id)
     if record is None:
         raise HTTPException(status_code=404, detail="No such detection")
 
@@ -135,20 +154,26 @@ async def verify_detection(detection_id: int, file: UploadFile = File(...)):
         tmp_path = tmp.name
 
     try:
-        is_valid = hash_audio(tmp_path) == record["audio_hash"]
-        if not is_valid:
-            raise HTTPException(status_code=409, detail="Audio does not match stored record")
+        local_valid = hash_audio(tmp_path) == record["audio_hash"]
 
         onchain = {"checked": False, "valid": None}
-        onchain_detection_id = record.get("onchain_detection_id")
-        if onchain_detection_id is not None:
-            try:
-                onchain["valid"] = blockchain.verify_detection(onchain_detection_id, tmp_path)
-                onchain["checked"] = True
-            except Exception as e:
-                onchain["error"] = str(e)
+        if record["onchain_detection_id"] is not None:
+            onchain = check_onchain(record, tmp_path)
 
-        return {"verified": True, "detection_id": detection_id, "onchain": onchain}
+        # The chain is the source of truth when it could be checked; the local
+        # sha256 is the fallback for unanchored records or an unreachable RPC.
+        if onchain["checked"]:
+            verified = onchain["valid"] and onchain["record_matches_db"]
+        else:
+            verified = local_valid
+
+        body = {
+            "verified": verified,
+            "detection_id": detection_id,
+            "local_valid": local_valid,
+            "onchain": onchain,
+        }
+        return JSONResponse(body, status_code=200 if verified else 409)
     finally:
         Path(tmp_path).unlink(missing_ok=True)
 
