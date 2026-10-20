@@ -65,6 +65,9 @@ def check_onchain(record: dict, file_path: str) -> dict:
         "valid": None,               # audio keccak256 == on-chain hash
         "record_matches_db": None,   # DB fields == on-chain fields
         "mismatched_fields": [],
+        # Lets clients link to the record on a block explorer.
+        "contract_address": blockchain.CONTRACT_ADDRESS,
+        "onchain_detection_id": record["onchain_detection_id"],
     }
     try:
         onchain_record = blockchain.get_detection(record["onchain_detection_id"])

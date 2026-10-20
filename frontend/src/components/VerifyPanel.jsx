@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { verifyDetection } from "../api.js";
+import { describe, explorerUrl } from "../verifyResult.js";
+
+const ICONS = { pass: "✓", fail: "✗", warn: "!" };
 
 export default function VerifyPanel({ detectionId, onClose }) {
   const [result, setResult] = useState(null);
   const [busy, setBusy] = useState(false);
-  const [limitMessage, setLimitMessage] = useState(null);
 
   async function handleFile(e) {
     const file = e.target.files?.[0];
@@ -13,20 +15,22 @@ export default function VerifyPanel({ detectionId, onClose }) {
     setResult(null);
     try {
       const { ok, status, body } = await verifyDetection(detectionId, file);
-      if (status === 429 || status === 413) {
-        // Rate limited or file too large: not a verdict on the audio.
-        setLimitMessage(body?.detail || "Request refused; please try again later.");
-        setResult("limited");
+      if (body && "verified" in body) {
+        setResult({ kind: "verdict", verified: body.verified, body });
       } else {
-        setResult(ok ? "match" : "mismatch");
+        // Rate limited, too large, unknown id...: not a verdict on the audio.
+        setResult({ kind: "refused", text: body?.detail || `Request failed (${status}).` });
       }
     } catch {
-      setResult("error");
+      setResult({ kind: "refused", text: "Verification request failed." });
     } finally {
       setBusy(false);
       e.target.value = "";
     }
   }
+
+  const verdict = result?.kind === "verdict" ? describe(result.body) : null;
+  const explorer = verdict && result.body.onchain?.checked ? explorerUrl(result.body.onchain) : null;
 
   return (
     <div className="verify-overlay" role="dialog" aria-label="Verify detection">
@@ -35,19 +39,31 @@ export default function VerifyPanel({ detectionId, onClose }) {
           ×
         </button>
         <h3>Verify detection #{detectionId}</h3>
-        <p>Upload the original audio file to check it against the stored record.</p>
+        <p>Upload the original audio file to check it against the stored and on-chain records.</p>
 
         <label className="upload-drop small">
           <input type="file" accept="audio/*" onChange={handleFile} disabled={busy} hidden />
           <span>{busy ? "Checking…" : "Choose audio file"}</span>
         </label>
 
-        {result === "match" && <p className="result result-match">Verified — hash matches stored record.</p>}
-        {result === "mismatch" && (
-          <p className="result result-mismatch">No match — this file does not match the stored record.</p>
+        {verdict && (
+          <div className={`result ${result.verified ? "result-match" : "result-mismatch"}`}>
+            <p className="verify-headline">{verdict.headline}</p>
+            <ul className="verify-checks">
+              {verdict.checks.map((c) => (
+                <li key={c.text} className={`check-${c.status}`}>
+                  <span aria-hidden="true">{ICONS[c.status]}</span> {c.text}
+                </li>
+              ))}
+            </ul>
+            {explorer && (
+              <a className="verify-explorer" href={explorer} target="_blank" rel="noreferrer">
+                View the contract on Polygonscan ↗
+              </a>
+            )}
+          </div>
         )}
-        {result === "limited" && <p className="result result-mismatch">{limitMessage}</p>}
-        {result === "error" && <p className="result result-mismatch">Verification request failed.</p>}
+        {result?.kind === "refused" && <p className="result result-mismatch">{result.text}</p>}
       </div>
     </div>
   );
