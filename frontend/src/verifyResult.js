@@ -22,7 +22,7 @@ export function describe(body) {
     } else {
       checks.push(
         onchain.valid
-          ? { status: "pass", text: `Audio matches the hash anchored on Polygon (record #${onchain.onchain_detection_id})` }
+          ? { status: "pass", text: `Audio matches the hash anchored on Polygon (on-chain record #${onchain.onchain_detection_id})` }
           : { status: "fail", text: "Audio does not match the hash anchored on Polygon" }
       );
       checks.push(
