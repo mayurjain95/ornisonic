@@ -106,6 +106,13 @@ def get_detection(detection_id: int) -> dict | None:
         ).fetchone()
 
 
+def detections_stored_in_last_day() -> int:
+    with _get_pool().connection() as conn:
+        return conn.execute(
+            "SELECT count(*) AS n FROM detections WHERE created_at > now() - interval '24 hours'"
+        ).fetchone()["n"]
+
+
 def anchored_onchain_ids() -> set[int]:
     with _get_pool().connection() as conn:
         rows = conn.execute(

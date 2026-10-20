@@ -146,6 +146,18 @@ Open http://localhost:5173 — the dev server proxies `/api/*` requests to the F
   ```bash
   npx firebase-tools deploy --only hosting   # builds frontend/ first
   ```
+- **Abuse limits** (`backend/limits.py`), configurable with env vars on Cloud Run:
+
+  | Env var | Default | What it limits |
+  |---|---|---|
+  | `UPLOADS_PER_HOUR` | 20 | `/upload` calls per client IP per hour |
+  | `VERIFIES_PER_HOUR` | 60 | `/verify` calls per client IP per hour |
+  | `MAX_STORED_DETECTIONS_PER_DAY` | 25 | Stored detections (Pinata upload + on-chain tx) across all users, rolling 24 h |
+  | `MAX_UPLOAD_MB` | 10 | Upload size |
+
+  Per-IP counters are in memory (per instance, reset on scale-to-zero); the
+  daily storage cap is counted in Postgres, so it holds across instances and
+  restarts. Over-limit requests get a 429 (or 413 for size).
 
 ## Measured results
 

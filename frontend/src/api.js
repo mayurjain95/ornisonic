@@ -6,7 +6,10 @@ export async function uploadAudio(file) {
   const form = new FormData();
   form.append("file", file);
   const res = await fetch(`${BASE}/upload`, { method: "POST", body: form });
-  if (!res.ok) throw new Error(`Upload failed: ${res.status}`);
+  if (!res.ok) {
+    const body = await res.json().catch(() => null);
+    throw new Error(body?.detail || `server returned ${res.status}`);
+  }
   return res.json();
 }
 

@@ -17,11 +17,11 @@ import tempfile
 from contextlib import asynccontextmanager
 from pathlib import Path
 
-from fastapi import FastAPI, File, UploadFile, HTTPException
+from fastapi import FastAPI, File, Request, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
-from backend import blockchain, classifier, db, ipfs_client
+from backend import blockchain, classifier, db, ipfs_client, limits
 
 
 @asynccontextmanager
@@ -95,7 +95,11 @@ def check_onchain(record: dict, file_path: str) -> dict:
 
 
 @app.post("/upload")
-async def upload_audio(file: UploadFile = File(...)):
+async def upload_audio(request: Request, file: UploadFile = File(...)):
+    limits.check_rate(request, "upload")
+    limits.check_upload_size(file)
+    limits.check_daily_storage_cap()
+
     suffix = Path(file.filename).suffix or ".wav"
     with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as tmp:
         shutil.copyfileobj(file.file, tmp)
@@ -157,7 +161,10 @@ async def stats():
 
 
 @app.post("/verify/{detection_id}")
-async def verify_detection(detection_id: int, file: UploadFile = File(...)):
+async def verify_detection(request: Request, detection_id: int, file: UploadFile = File(...)):
+    limits.check_rate(request, "verify")
+    limits.check_upload_size(file)
+
     record = db.get_detection(detection_id)
     if record is None:
         raise HTTPException(status_code=404, detail="No such detection")

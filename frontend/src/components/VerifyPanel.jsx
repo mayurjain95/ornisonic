@@ -4,6 +4,7 @@ import { verifyDetection } from "../api.js";
 export default function VerifyPanel({ detectionId, onClose }) {
   const [result, setResult] = useState(null);
   const [busy, setBusy] = useState(false);
+  const [limitMessage, setLimitMessage] = useState(null);
 
   async function handleFile(e) {
     const file = e.target.files?.[0];
@@ -11,8 +12,14 @@ export default function VerifyPanel({ detectionId, onClose }) {
     setBusy(true);
     setResult(null);
     try {
-      const { ok, body } = await verifyDetection(detectionId, file);
-      setResult(ok ? "match" : "mismatch");
+      const { ok, status, body } = await verifyDetection(detectionId, file);
+      if (status === 429 || status === 413) {
+        // Rate limited or file too large: not a verdict on the audio.
+        setLimitMessage(body?.detail || "Request refused; please try again later.");
+        setResult("limited");
+      } else {
+        setResult(ok ? "match" : "mismatch");
+      }
     } catch {
       setResult("error");
     } finally {
@@ -39,6 +46,7 @@ export default function VerifyPanel({ detectionId, onClose }) {
         {result === "mismatch" && (
           <p className="result result-mismatch">No match — this file does not match the stored record.</p>
         )}
+        {result === "limited" && <p className="result result-mismatch">{limitMessage}</p>}
         {result === "error" && <p className="result result-mismatch">Verification request failed.</p>}
       </div>
     </div>
