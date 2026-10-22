@@ -59,19 +59,29 @@ def classify_audio(file_path: str, min_confidence: float = 0.5) -> dict:
     recording = Recording(analyzer, file_path, min_conf=min_confidence)
     recording.analyze()
 
-    matches = []
+    # BirdNET reports one detection per 3 s window, so a bird calling through
+    # a 9 s clip shows up three times. Merge to one match per species (max
+    # confidence, earliest start to latest end) so each species is stored
+    # and anchored once per upload.
+    matches_by_species = {}
     best_guess = None
     for detection in recording.detections:
         scientific_name = detection["scientific_name"]
         if scientific_name in watchlist:
-            matches.append({
-                "species": detection["common_name"],
-                "scientific_name": scientific_name,
-                "confidence": detection["confidence"],
-                "iucn_status": watchlist[scientific_name],
-                "start_time": detection["start_time"],
-                "end_time": detection["end_time"],
-            })
+            existing = matches_by_species.get(scientific_name)
+            if existing is None:
+                matches_by_species[scientific_name] = {
+                    "species": detection["common_name"],
+                    "scientific_name": scientific_name,
+                    "confidence": detection["confidence"],
+                    "iucn_status": watchlist[scientific_name],
+                    "start_time": detection["start_time"],
+                    "end_time": detection["end_time"],
+                }
+            else:
+                existing["confidence"] = max(existing["confidence"], detection["confidence"])
+                existing["start_time"] = min(existing["start_time"], detection["start_time"])
+                existing["end_time"] = max(existing["end_time"], detection["end_time"])
         elif scientific_name not in NON_SPECIES_LABELS:
             if best_guess is None or detection["confidence"] > best_guess["confidence"]:
                 best_guess = {
@@ -80,4 +90,4 @@ def classify_audio(file_path: str, min_confidence: float = 0.5) -> dict:
                     "confidence": detection["confidence"],
                 }
 
-    return {"matches": matches, "best_guess": best_guess}
+    return {"matches": list(matches_by_species.values()), "best_guess": best_guess}
